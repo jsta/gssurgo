@@ -1,9 +1,9 @@
 
 ## Problem statement
 
-The `gSURRGO` dataset is set up so that all data is referenced to a raster grid that is contained within geodatabases. These grids can only be extracted using ArcGIS (using the fileGDB driver).
+The `gSURRGO` dataset is set up so that all data is referenced to raster grids contained within archives in the geodatabase format. These grids can only be extracted using ArcGIS (using the fileGDB driver).
 
-This repo enables subsequent open source workflows by extracting the grid aggregating the remaining data into a geopackage format.
+This repo enables subsequent open source workflows by extracting the grid and aggregating the remaining data into a geopackage.
 
 ## Prereqs
 
