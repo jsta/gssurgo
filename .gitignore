@@ -1,1 +1,3 @@
 tifs/*.tif*
+.Rproj.user
+*.gdb
