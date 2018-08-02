@@ -17,4 +17,4 @@ This repo enables subsequent open source workflows by extracting the grid and ag
 
 `make all`
 
-> Do not attempt to compress tifs. They are still very large even with the most aggresive `gdal` compression.
+> Do not attempt to compress the output tifs. They are still very large even with the most aggresive `gdal` compression.

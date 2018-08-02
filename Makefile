@@ -5,17 +5,14 @@ gpkgs := $(gdbs:.gdb=.gpkg)
 
 # ME, CT, IL, IN, IA, MN, MO, NH, VT, MA, MI, NJ, NY, OH, PA, RI, WI}
 
-.PHONY: all test gpackages
-
-gpackages: $(gpkgs)
-	echo $<
+.PHONY: all test
 
 test:
 	@echo $(gdbs)
 	@echo $(tifs)	
 	@echo $(gpkgs)
 
-all: tifs/$(tifs)
+all: $(gpkgs)
 
 $(gdbs): $(zips)
 	unzip -u $<
