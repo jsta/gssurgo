@@ -1,7 +1,7 @@
 
 ## Problem statement
 
-The `gSSURGO` contains multiple text format datasets referenced to a single raster grid. The raster grids are contained within archives in the geodatabase format so they can only be extracted using ArcGIS (using the fileGDB driver).
+`gSSURGO` contains multiple text format datasets referenced to a single raster grid. The raster grids are contained within file geodatabase archives and  can only be extracted using ArcGIS (using the fileGDB driver).
 
 This repo enables subsequent open source workflows by extracting the grid and aggregating it along with the remaining data into a geopackage.
 
@@ -16,3 +16,5 @@ This repo enables subsequent open source workflows by extracting the grid and ag
 ## Usage
 
 `make all`
+
+> Do not attempt to compress tifs. They are still very large even with the most aggresive `gdal` compression.
