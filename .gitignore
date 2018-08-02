@@ -1,3 +1,5 @@
 tifs/*.tif*
 .Rproj.user
 *.gdb
+*.zip
+*.gpkg
