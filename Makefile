@@ -26,4 +26,6 @@ $(tifs): $(gdbs)
 	C:/Python27/ArcGIS10.3/python.exe pull_ssurgo_tif.py $</MapunitRaster_10m $@
 
 $(gpkgs): $(gdbs) $(tifs)
-	ogr2ogr -update -f GPKG $@ $<
+	-ogr2ogr -progress -f GPKG $@ $<
+	-ogr2ogr -update -f GPKG $@ $<
+	gdal_translate -of GPKG $(filter-out $<,$^) $@
