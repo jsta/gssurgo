@@ -1,22 +1,29 @@
 zips = ${wildcard *.zip}
 gdbs := $(basename $(zips))
-tifs := $(gdbs:.gdb=.tif)
+tifs := tifs/$(gdbs:.gdb=.tif)
+gpkgs := $(gdbs:.gdb=.gpkg)
 
 # ME, CT, IL, IN, IA, MN, MO, NH, VT, MA, MI, NJ, NY, OH, PA, RI, WI}
 
-.PHONY: tifs all test
+.PHONY: all test gpackages
 
-test: 
-	echo $(tifs)
-	echo $(gdbs)
+gpackages: $(gpkgs)
+	echo $<
+
+test:
+	@echo $(gdbs)
+	@echo $(tifs)	
+	@echo $(gpkgs)
 
 all: tifs/$(tifs)
 
 $(gdbs): $(zips)
-	unzip $<
+	unzip -u $<
 
-tifs/$(tifs): $(gdbs)
+$(tifs): $(gdbs)
 	echo $@
 	echo $</MapunitRaster_10m
 	C:/Python27/ArcGIS10.3/python.exe pull_ssurgo_tif.py $</MapunitRaster_10m $@
-	
+
+$(gpkgs): $(gdbs) $(tifs)
+	ogr2ogr -update -f GPKG $@ $<
