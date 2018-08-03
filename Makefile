@@ -17,7 +17,7 @@ test_query:
 	python query_gpkg.py tests/test.gpkg dt dt tests/r1.tif 0 10 0 10 tests/dt.tif
 
 test_gssurgo:
-	python query_gpkg.py gSSURGO_MI.gpkg chfrags fragsize_l tifs/gSSURGO.tif x x x x fragsize.tif
+	python query_gpkg.py gSSURGO_MI.gpkg chfrags fragsize_l tifs/gSSURGO_MI.tif 967288.6 925029.1 2214590.5 2258563.5 fragsize.tif  
 
 all: $(gpkgs)
 
