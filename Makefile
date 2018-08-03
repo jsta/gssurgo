@@ -7,10 +7,14 @@ gpkgs := $(gdbs:.gdb=.gpkg)
 
 .PHONY: all test tifs clean
 
-test:
+test_makefile:
 	@echo $(gdbs)
 	@echo $(tifs)	
 	@echo $(gpkgs)
+
+test_query:
+	Rscript tests/make_gpkg.R
+	python query_gpkg.py tests/test.gpkg dt dt tests/r1.tif 0 10 0 10 tests/dt.tif
 
 all: $(gpkgs)
 

@@ -5,3 +5,6 @@ tifs/*.tif*
 *.gpkg
 tests/*.tif
 tests/*.gpkg*
+tests/*.tif*
+gSSURGO.Rproj
+.Rhistory
