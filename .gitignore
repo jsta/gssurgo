@@ -3,3 +3,5 @@ tifs/*.tif*
 *.gdb
 *.zip
 *.gpkg
+tests/*.tif
+tests/*.gpkg*
