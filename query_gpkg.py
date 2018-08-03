@@ -17,12 +17,15 @@ import numpy as np
 
 src_gpkg = sys.argv[1]
 table_name = sys.argv[2]
-src_tif = sys.argv[3]
-out_raster = sys.argv[4]
+col_name = sys.argv[3]
+src_tif = sys.argv[4]
+out_raster = sys.argv[5]
+
+# `python query_gpkg.py gSSURGO_MI.gpkg some_variable tifs/gSSURGO_MI.tif some_variable.tif`
 
 # read data and join to raster index
 db = sqlite3.connect(src_gpkg)
-table = pd.read_sql_query("SELECT * FROM " + table_name, db)
+table = pd.read_sql_query("SELECT chkey, " + col_name + " FROM " + table_name, db)
 
 ds = gdal.Open(src_tif)
 nrow = ds.RasterYSize

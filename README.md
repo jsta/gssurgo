@@ -15,6 +15,10 @@ This repo enables subsequent open source workflows by extracting the grid and ag
 
 ## Usage
 
+### Extract tifs and build gpkg
 `make all`
 
 > Do not attempt to compress the output tifs. They are still very large even with the most aggresive `gdal` compression.
+
+### Pull specific variable and merge with corresponding tif
+`python query_gpkg.py gSSURGO_MI.gpkg some_table some_variable tifs/gSSURGO_MI.tif some_variable.tif`
