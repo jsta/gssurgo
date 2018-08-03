@@ -1,5 +1,5 @@
-import arcpy
 import sys
+import arcpy
 
 # arg 1 input path
 # arg 2 output path
