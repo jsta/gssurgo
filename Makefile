@@ -16,6 +16,9 @@ test_query:
 	Rscript tests/make_gpkg.R
 	python query_gpkg.py tests/test.gpkg dt dt tests/r1.tif 0 10 0 10 tests/dt.tif
 
+test_gssurgo:
+	python query_gpkg.py gSSURGO_MI.gpkg chfrags fragsize_l tifs/gSSURGO.tif x x x x fragsize.tif
+
 all: $(gpkgs)
 
 tifs: $(tifs)
