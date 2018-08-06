@@ -9,3 +9,4 @@ tests/*.tif*
 gSSURGO.Rproj
 .Rhistory
 temp.tif
+tifs/*.tfw

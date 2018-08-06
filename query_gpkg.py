@@ -18,7 +18,7 @@ ymax = float(sys.argv[7])
 out_raster = sys.argv[8]
 
 # src_gpkg = "gSSURGO_MI.gpkg"
-# sql_query = "SELECT `mukey`, `nonirryield_r` FROM `mucropyld` WHERE (`cropname` = 'Corn')"
+# sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")'
 # src_tif = "tifs/gSSURGO_MI.tif"
 # xmin = 925029.1
 # xmax = 967288.6
@@ -28,6 +28,7 @@ out_raster = sys.argv[8]
 # read data and join to raster index
 db = sqlite3.connect(src_gpkg)
 table = pd.read_sql_query(sql_query, db)
+table.mukey = table.mukey.astype(int)
 
 # crop original raster to bounding box so we can read in memory
 # https://gis.stackexchange.com/a/237412/32531
@@ -44,8 +45,9 @@ raw_values = ds.ReadAsArray()
 pixel_values = raw_values.flatten()
 pixel_values = pd.DataFrame(pixel_values, columns = ['mukey'])
 pixel_values.mukey = pixel_values.mukey.astype(int)
-pixel_values = pixel_values.set_index('mukey', verify_integrity=False).join(table.set_index('mukey'))
-pixel_values = pixel_values.values
+
+pixel_values = pd.merge(left = pixel_values, right = table, how = 'left', on = 'mukey')
+pixel_values = pixel_values.iloc[:,1].values
 pixel_values = np.reshape(pixel_values, (nrow, ncol))
 
 # create output raster
