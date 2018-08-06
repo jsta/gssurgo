@@ -5,7 +5,9 @@ gpkgs := $(gdbs:.gdb=.gpkg)
 
 # ME, CT, IL, IN, IA, MN, MO, NH, VT, MA, MI, NJ, NY, OH, PA, RI, WI}
 
-.PHONY: all test tifs clean
+.PHONY: all test tifs clean example
+
+test: test_makefile test_query test_gssurgo
 
 test_makefile:
 	@echo $(gdbs)
@@ -18,6 +20,9 @@ test_query:
 
 test_gssurgo:
 	python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")' tifs/gSSURGO_MI.tif 967288.6 925029.1 2214590.5 2258563.5 tests/nonirryield_r.tif
+
+example_kwfact: # erodability factor adjusted for rock fragments
+	python query_gpkg.py gSSURGO_MI.gpkg ''
 
 all: $(gpkgs)
 
