@@ -2,6 +2,8 @@ library(rgdal)
 library(raster)
 library(dplyr)
 
+set.seed(554)
+
 r1       <- raster(nrows=20, ncols=20, xmn=0, xmx=10, ymn = 0, ymx = 10)
 data_len <- ncell(r1)
 r1[]     <- seq_len(data_len)
