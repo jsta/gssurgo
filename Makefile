@@ -9,15 +9,15 @@ gpkgs := $(gdbs:.gdb=.gpkg)
 
 test_makefile:
 	@echo $(gdbs)
-	@echo $(tifs)	
+	@echo $(tifs)
 	@echo $(gpkgs)
 
-test_query: # has a 0.5 resolution hence 5 instead of 10 for the bbox
+test_query:
 	Rscript tests/make_gpkg.R
-	python query_gpkg.py tests/test.gpkg 'SELECT * FROM dt' tests/r1.tif 5 0 0 5 tests/dt.tif
+	python query_gpkg.py tests/test.gpkg 'SELECT * FROM dt' tests/r1.tif 5 0 5 10 tests/dt.tif
 
 test_gssurgo:
-	python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")' tifs/gSSURGO_MI.tif 967288.6 925029.1 2214590.5 2258563.5 tests/nonirryield_r.tif  
+	python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")' tifs/gSSURGO_MI.tif 967288.6 925029.1 2214590.5 2258563.5 tests/nonirryield_r.tif
 
 all: $(gpkgs)
 
