@@ -8,3 +8,4 @@ tests/*.gpkg*
 tests/*.tif*
 gSSURGO.Rproj
 .Rhistory
+temp.tif
