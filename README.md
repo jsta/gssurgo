@@ -1,3 +1,4 @@
+# gSSURGO
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
@@ -34,3 +35,8 @@ Compose an SQL query that give a two column result of `mukey` and `some_variable
 ```
 python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")' tifs/gSSURGO_MI.tif 967288.6 925029.1 2214590.5 2258563.5 nonirryield_r.tif
 ```
+
+> See more SQL query examples in [construct_sql.R](construct_sql.R).
+
+### 3. Visualize output
+
