@@ -9,19 +9,17 @@ import pandas as pd
 import numpy as np
 
 src_gpkg = sys.argv[1]
-table_name = sys.argv[2]
-col_name = sys.argv[3]
-src_tif = sys.argv[4]
-xmax = float(sys.argv[5])
-xmin = float(sys.argv[6])
-ymin = float(sys.argv[7])
-ymax = float(sys.argv[8])
-out_raster = sys.argv[9]
+sql_query = sys.argv[2]
+src_tif = sys.argv[3]
+xmax = float(sys.argv[4])
+xmin = float(sys.argv[5])
+ymin = float(sys.argv[6])
+ymax = float(sys.argv[7])
+out_raster = sys.argv[8]
 
-# src_tif = "tifs/gSSURGO_MI.tif"
-# col_name = "fragsize_l"
-# table_name = "chfrags"
 # src_gpkg = "gSSURGO_MI.gpkg"
+# sql_query = "SELECT `mukey`, `nonirryield_r` FROM `mucropyld` WHERE (`cropname` = 'Corn')"
+# src_tif = "tifs/gSSURGO_MI.tif"
 # xmin = 925029.1
 # xmax = 967288.6
 # ymin = 2214590.5
@@ -29,7 +27,7 @@ out_raster = sys.argv[9]
 
 # read data and join to raster index
 db = sqlite3.connect(src_gpkg)
-table = pd.read_sql_query("SELECT mukey, " + col_name + " FROM " + table_name, db)
+table = pd.read_sql_query(sql_query, db)
 
 # crop original raster to bounding box so we can read in memory
 # https://gis.stackexchange.com/a/237412/32531
@@ -42,9 +40,11 @@ nrow = ds.RasterYSize
 ncol = ds.RasterXSize
 
 raw_values = ds.ReadAsArray()
+
 pixel_values = raw_values.flatten()
 pixel_values = pd.DataFrame(pixel_values, columns = ['mukey'])
-pixel_values = pixel_values.set_index('mukey').join(table.set_index('mukey'))
+pixel_values.mukey = pixel_values.mukey.astype(int)
+pixel_values = pixel_values.set_index('mukey', verify_integrity=False).join(table.set_index('mukey'))
 pixel_values = pixel_values.values
 pixel_values = np.reshape(pixel_values, (nrow, ncol))
 
