@@ -14,10 +14,10 @@ test_makefile:
 
 test_query:
 	Rscript tests/make_gpkg.R
-	python query_gpkg.py tests/test.gpkg dt dt tests/r1.tif 0 10 0 10 tests/dt.tif
+	python query_gpkg.py tests/test.gpkg 'SELECT * FROM dt' tests/r1.tif 0 10 0 10 tests/dt.tif
 
 test_gssurgo:
-	python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")' tifs/gSSURGO_MI.tif 967288.6 925029.1 2214590.5 2258563.5 nonirryield_r.tif  
+	python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")' tifs/gSSURGO_MI.tif 967288.6 925029.1 2214590.5 2258563.5 tests/nonirryield_r.tif  
 
 all: $(gpkgs)
 

@@ -7,7 +7,7 @@ data_len <- ncell(r1)
 r1[]     <- seq_len(data_len)
 writeRaster(r1, "tests/r1.tif", overwrite = TRUE)
 
-dt    <- data.frame(chkey = seq_len(ncell(r1)),
+dt    <- data.frame(mukey = seq_len(ncell(r1)),
                  dt = sample(1:30, data_len, replace = TRUE))
 my_db <- src_sqlite("tests/test.gpkg", create = TRUE)
 copy_to(my_db, dt, "dt", temporary = FALSE, overwrite = TRUE)
