@@ -1,6 +1,5 @@
 library(dplyr)
 library(magrittr)
-library(janitor)
 
 # ---- test_gssurgo ----
 gpkg <- "gSSURGO_MI.gpkg"
