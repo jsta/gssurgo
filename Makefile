@@ -22,7 +22,7 @@ test_gssurgo:
 	python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")' tifs/gSSURGO_MI.tif 967288.6 925029.1 2214590.5 2258563.5 tests/nonirryield_r.tif
 
 example_kwfact: # erodability factor adjusted for rock fragments
-	python query_gpkg.py gSSURGO_MI.gpkg ''
+	python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, AVG(kwfact) AS kwfact FROM (SELECT TBL_LEFT.mukey AS mukey, TBL_LEFT.cokey AS cokey, TBL_LEFT.majcompflag AS majcompflag, TBL_RIGHT.hzname AS hzname, TBL_RIGHT.kwfact AS kwfact FROM (SELECT mukey AS mukey, cokey AS cokey, majcompflag AS majcompflag FROM component) AS TBL_LEFT LEFT JOIN (SELECT hzname AS hzname, kwfact AS kwfact, cokey AS cokey FROM chorizon) AS TBL_RIGHT ON (TBL_LEFT.cokey = TBL_RIGHT.cokey)) WHERE (majcompflag = "Yes") GROUP BY mukey' tifs/gSSURGO_MI.tif 967288.6 925029.1 2214590.5 2258563.5 examples/kwfact.tif
 
 all: $(gpkgs)
 

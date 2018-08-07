@@ -46,13 +46,17 @@ pixel_values = raw_values.flatten()
 pixel_values = pd.DataFrame(pixel_values, columns = ['mukey'])
 pixel_values.mukey = pixel_values.mukey.astype(int)
 
+# print(table.mukey.describe())
+# print(table[table.mukey.isin([186365, 1455241])])
+
 pixel_values = pd.merge(left = pixel_values, right = table, how = 'left', on = 'mukey')
 pixel_values = pixel_values.iloc[:,1].values
 pixel_values = np.reshape(pixel_values, (nrow, ncol))
+# print(pixel_values)
 
 # create output raster
 driver = ds.GetDriver()
-out_data = driver.Create(out_raster, ncol, nrow)
+out_data = driver.Create(out_raster, ncol, nrow, 1, gdal.GDT_Float32)
 
 out_data.SetGeoTransform(ds.GetGeoTransform())
 out_data.SetProjection(ds.GetProjection())
@@ -61,4 +65,5 @@ out_band = out_data.GetRasterBand(1)
 out_band.WriteArray(pixel_values)
 out_band.FlushCache()
 
+out_data = None
 # os.remove("temp.tif")
