@@ -16,4 +16,4 @@ shrink_bbox <- function(bbox, fact = 2){
   bbox
 }
 
-cat(as.vector(shrink_bbox(bbox)[c(3, 1, 2, 4)]))
+cat(as.vector(shrink_bbox(bbox, 4)[c(3, 1, 2, 4)]))

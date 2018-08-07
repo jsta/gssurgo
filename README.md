@@ -23,20 +23,19 @@ source activate gSSURGO
 
 ## Usage
 
-### 1. Extract tifs and build gpkg
-`make all`
+### 1. Extract tifs and build gpkgs
 
-> Do not attempt to compress the output tifs. They are still very large even with the most aggresive `gdal` compression.
+`make all`
 
 ### 2. Pull specific variable and merge with corresponding tif
 
-Compose an SQL query that give a two column result of `mukey` and `some_variable`. For example, `'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")'`. Pass this query to `query_gpkg.py` along with a bounding box given by `xmax`, `xmin`, `ymin`, `ymax`:
+Compose an SQL query that give a two column result of `mukey` and `some_variable`. For example, `'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")'`. Pass this query to `query_gpkg.py` along with a bounding box given by `xmax`, `xmin`, `ymin`, `ymax`. For example, the following call produces a tif or non irrigated corn yields clipped to the defined bounding box:
 
 ```
-python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")' tifs/gSSURGO_MI.tif 967288.6 925029.1 2214590.5 2258563.5 nonirryield_r.tif
+python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")' tifs/gSSURGO_MI.tif 935594 925029.1 2214590 2225584 tests/nonirryield_r.tif
 ```
-
-> See more SQL query examples in [construct_sql.R](construct_sql.R).
 
 ### 3. Visualize output
+
+
 
