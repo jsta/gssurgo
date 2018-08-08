@@ -12,3 +12,5 @@ temp.tif
 tifs/*.tfw
 examples/*.tif
 *.tif.*
+__pycache__/
+.GetDriver()
