@@ -43,5 +43,5 @@ Pass the name of an output tif to `viz_numeric_output.py`:
 python viz_numeric_output.py tests/nonirryield_r.tif tests/nonirryield_r.png
 ```
 
-![](tests/nonirryield.png)
+![](tests/nonirryield_r.png)
 
