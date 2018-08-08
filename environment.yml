@@ -3,3 +3,4 @@ gdal
 pandas
 rasterio
 matplotlib
+geopandas
