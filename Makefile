@@ -1,7 +1,7 @@
-zips = ${wildcard *.zip}
-gdbs := $(basename $(zips))
-tifs := tifs/$(gdbs:.gdb=.tif)
-gpkgs := $(gdbs:.gdb=.gpkg)
+zips = $(wildcard *.zip)
+gdbs := $(zips:%.zip=.gdb)
+tifs := $(gdbs:%.gdb=tifs/%.tif)
+gpkgs := $(gdbs:%.gdb=%.gpkg)
 
 # ME, CT, IL, IN, IA, MN, MO, NH, VT, MA, MI, NJ, NY, OH, PA, RI, WI}
 
@@ -24,25 +24,30 @@ test_gssurgo:
 example_kwfact: # erodability factor adjusted for rock fragments
 	python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, AVG(kwfact) AS kwfact FROM (SELECT TBL_LEFT.mukey AS mukey, TBL_LEFT.cokey AS cokey, TBL_LEFT.majcompflag AS majcompflag, TBL_RIGHT.hzname AS hzname, TBL_RIGHT.kwfact AS kwfact FROM (SELECT mukey AS mukey, cokey AS cokey, majcompflag AS majcompflag FROM component) AS TBL_LEFT LEFT JOIN (SELECT hzname AS hzname, kwfact AS kwfact, cokey AS cokey FROM chorizon) AS TBL_RIGHT ON (TBL_LEFT.cokey = TBL_RIGHT.cokey)) WHERE (majcompflag = "Yes") GROUP BY mukey' tifs/gSSURGO_MI.tif 967288.6 925029.1 2214590.5 2258563.5 examples/kwfact.tif
 
-all: $(gpkgs)
+all: $(gdbs)
 
-tifs: $(tifs)
+#tifs: $(tifs) $(gdbs)
+#	@echo $<
+
+gdbs: $(gdbs)
 
 clean:
 	-rm $(tifs)
+	-rm -rf $(gdbs)
+	-rm -rf $(gpkgs)
+	-rm tifs/*.tfw tifs/*.ovr tifs/*.xml tifs/*.cpg tifs/*.dbf	
 
-$(gdbs): $(zips)
+%.gdb: %.zip
 	unzip -u $<
 
-$(tifs): $(gdbs) pull_ssurgo_tif.py
+%.tif: %.gdb pull_ssurgo_tif.py
 	echo $@
 	echo $</MapunitRaster_10m
-	C:/Python27/ArcGIS10.3/python.exe pull_ssurgo_tif.py $</MapunitRaster_10m $@
-	gdal_translate -ot Float32 $@ temp.tif
-	mv temp.tif $@
+	-C:/Python27/ArcGIS10.3/python.exe pull_ssurgo_tif.py $</MapunitRaster_10m $@
+	-gdal_translate -ot Float32 $@ temp.tif
+	-mv temp.tif $@
 	-rm temp.tif
 
-$(gpkgs): $(gdbs) $(tifs)
+%.gpkg: %.gdb
 	-ogr2ogr -progress -f GPKG $@ $<
 	-ogr2ogr -update -f GPKG $@ $<
-	gdal_translate -of GPKG $(filter-out $<,$^) $@ -co APPEND_SUBDATASET=YES
