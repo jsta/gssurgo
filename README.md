@@ -4,7 +4,7 @@
 
 `gSSURGO` contains multiple text format datasets referenced to a single raster grid. The raster grids are contained within file geodatabase archives and  can only be extracted using ArcGIS (using the fileGDB driver).
 
-This repo enables subsequent open source workflows by extracting the grid and aggregating it along with the remaining data into a geopackage.
+This repo enables subsequent open source workflows by extracting the grid and aggregating it along with the remaining data into a geopackage. Specific queries of `gSSURGO` data need to be constructed in `SQL` and subsequently called against a given geopackage using the `query_gpkg.py` script.
 
 ## Prereqs
 

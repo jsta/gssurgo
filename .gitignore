@@ -14,3 +14,4 @@ examples/*.tif
 *.tif.*
 __pycache__/
 .GetDriver()
+.envrc
