@@ -16,8 +16,10 @@ test_makefile:
 
 all: $(gdbs) $(tifs) $(gpkgs)
 
+gdbs: $(gdbs)
+
 %.gdb: %.gdb.zip
-	unzip -u $<
+	-unzip -u $<
 
 tifs/%.tif: %.gdb pull_ssurgo_tif.py
 	echo $@
