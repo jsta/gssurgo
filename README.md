@@ -35,8 +35,11 @@ pip install --upgrade git+git://github.com/jsta/gssurgo.git
 ### 1. Extract tif and build gpkgs
 
 ```
+extract_gssurgo_tif 'path/to/gSSURGO_STATE.gdb/MapunitRaster_10m' 'path/to/STATE.tif'
+```
+
+```
 import gssurgo
-gssurgo.extract_tif("gSSURGO_MI.gdb\MapunitRaster_10m", "tifs\MI.tif")
 gssurgo.build_gpkg("gSSURGO_MI.gdb", "gSSURGO_MI.gpkg")
 ```
 
