@@ -24,7 +24,10 @@ source activate gSSURGO
 # pip install -e  . 
 
 # development install 
-pip install https://github.com/jsta/gssurgo/zipball/master
+pip install git+git://github.com/jsta/gssurgo.git
+
+# development upgrade
+pip install --upgrade git+git://github.com/jsta/gssurgo.git
 ```
 
 ## Usage

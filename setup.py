@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/jsta/gssurgo",
-    scripts=['bin/extract_tif'],
+    scripts=['bin/extract_gssurgo_tif', 'bin/__extract_gssurgo_tif__.py'],
     packages=setuptools.find_packages(exclude=['tests']),
     classifiers=(
         "Programming Language :: Python :: 3",

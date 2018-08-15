@@ -1,0 +1,3 @@
+#!/usr/bin/env C:\Python27\ArcGIS10.3\python.exe
+
+__extract_gssurgo_tif__.py $1 $2
