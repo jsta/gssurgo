@@ -8,24 +8,9 @@ import gdal
 import pandas as pd
 import numpy as np
 
-def query_gpkg(src_gpkg, ):
+def query_gpkg(src_gpkg, sql_query, src_tif, xmax, xmin, ymin, ymax, out_raster):
     '''
-    src_gpkg = sys.argv[1]
-    sql_query = sys.argv[2]
-    src_tif = sys.argv[3]
-    xmax = float(sys.argv[4])
-    xmin = float(sys.argv[5])
-    ymin = float(sys.argv[6])
-    ymax = float(sys.argv[7])
-    out_raster = sys.argv[8]
-
-    # src_gpkg = "gSSURGO_MI.gpkg"
-    # sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")'
-    # src_tif = "tifs/gSSURGO_MI.tif"
-    # xmin = 925029.1
-    # xmax = 967288.6
-    # ymin = 2214590.5
-    # ymax = 2258563.5
+    gssurgo.query_gpkg(src_gpkg = "gSSURGO_MI.gpkg", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', src_tif = "tifs/gSSURGO_MI.tif", xmin = 925029.1, xmax = 967288.6, ymin = 2214590.5, ymax = 2258563.5, out_raster = "tests/nonirryield_r.tif")
     '''
 
     # read data and join to raster index

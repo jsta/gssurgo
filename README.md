@@ -24,6 +24,10 @@ source activate gSSURGO
 ## Installation
 
 ```
+# local install
+# pip install -e  . 
+
+# pypi install 
 pip install gssurgo
 ```
 

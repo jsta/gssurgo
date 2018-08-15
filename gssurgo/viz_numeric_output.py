@@ -5,7 +5,6 @@ from matplotlib import pyplot as plt
 
 def viz_numeric_output(input_tif, output_png):
     '''
-    import gssurgo
     gssurgo.viz_numeric_output("tests/nonirryield_r.tif", "tests/nonirryield_r.png")
     '''
 
