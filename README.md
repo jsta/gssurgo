@@ -8,9 +8,7 @@ This repo enables subsequent open source workflows by extracting the grid and ag
 
 ## Prereqs
 
-* Have the `arcpy` python module available for the intial `tif` extraction step
-
-* Have the `ogr2ogr` command available and working with the `GPKG` driver
+* The intial `tif` (grid) extraction step requies the `arcpy` python module
 
 * Have the python modules listed in [environment.yml](environment.yml) installed. If using Anaconda, make sure you have the **64bit** version. You can install an Anaconda virtual environment with:
 
@@ -31,25 +29,26 @@ pip install https://github.com/jsta/gssurgo/zipball/master
 
 ## Usage
 
-### 1. Extract tifs and build gpkgs
+### 1. Extract tif and build gpkgs
 
-
+```
+import gssurgo
+gssurgo.extract_tif("gSSURGO_MI.gdb\MapunitRaster_10m", "tifs\MI.tif")
+gssurgo.build_gpkg("gSSURGO_MI.gdb", "gSSURGO_MI.gpkg")
+```
 
 ### 2. Pull specific variable and merge with corresponding tif
 
-Compose an SQL query that give a two column result of `mukey` and `some_variable`. For example, `'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")'`. Pass this query to `query_gpkg.py` along with a bounding box given by `xmax`, `xmin`, `ymin`, `ymax`. For example, the following call produces a tif or non irrigated corn yields clipped to the defined bounding box:
+```
+gssurgo.query_gpkg(src_gpkg = "gSSURGO_MI.gpkg", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', src_tif = "tifs/gSSURGO_MI.tif", xmin = 925029.1, xmax = 935594, ymin = 2214590.5, ymax = 2225584, out_raster = "tests/nonirryield_r.tif")
+```
 
-```
-python query_gpkg.py gSSURGO_MI.gpkg 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")' tifs/gSSURGO_MI.tif 935594 925029.1 2214590 2225584 tests/nonirryield_r.tif
-```
+> The `sql_query` parameter must give a two column result of `mukey` and `some_variable`. The above example produces a tif of non irrigated corn yields clipped to the defined bounding box: `'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")'`
 
 ### 3. Visualize output
 
-Pass the name of an output tif to `viz_numeric_output.py`:
-
 ```
-python viz_numeric_output.py tests/nonirryield_r.tif tests/nonirryield_r.png
+gssurgo.viz_numeric_output("tests/nonirryield_r.tif", "tests/nonirryield_r.png")
 ```
 
 ![](tests/nonirryield_r.png)
-

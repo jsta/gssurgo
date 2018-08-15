@@ -1,0 +1,6 @@
+#!/usr/bin/env C:\Python27\ArcGIS10.3\python.exe
+
+import sys
+import gssurgo
+
+gssurgo.extract_tif(sys.argv[1], sys.argv[2])
