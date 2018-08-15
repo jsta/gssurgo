@@ -10,9 +10,9 @@ import numpy as np
 
 def query_gpkg(src_gpkg, sql_query, src_tif, xmax, xmin, ymin, ymax, out_raster):
     '''
-    gssurgo.query_gpkg(src_gpkg = "gSSURGO_MI.gpkg", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', src_tif = "tifs/gSSURGO_MI.tif", xmin = 925029.1, xmax = 967288.6, ymin = 2214590.5, ymax = 2258563.5, out_raster = "tests/nonirryield_r.tif")
+    gssurgo.query_gpkg(src_gpkg = "gSSURGO_MI.gpkg", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', src_tif = "tifs/gSSURGO_MI.tif", xmin = 925029.1, xmax = 935594, ymin = 2214590.5, ymax = 2225584, out_raster = "tests/nonirryield_r.tif")
     '''
-
+    
     # read data and join to raster index
     db = sqlite3.connect(src_gpkg)
     table = pd.read_sql_query(sql_query, db)
