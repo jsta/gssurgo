@@ -1,3 +1,5 @@
 #!/usr/bin/env C:\Python27\ArcGIS10.3\python.exe
 
-__extract_gssurgo_tif__.py $1 $2
+# extract_gssurgo_tif gSSURGO_MI.gdb\MapunitRaster_10m tifs\MI.tif  
+
+__extract_gssurgo_tif__.py "$1" "$2"
