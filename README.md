@@ -21,6 +21,12 @@ conda env create -n gSSURGO -f environment.yml
 source activate gSSURGO
 ```
 
+## Installation
+
+```
+pip install gssurgo
+```
+
 ## Usage
 
 ### 1. Extract tifs and build gpkgs

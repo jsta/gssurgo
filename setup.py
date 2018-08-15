@@ -11,8 +11,8 @@ setuptools.setup(
     description="Python toolbox enabling an open source gSSURGO workflow",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/jsta/gSSURGO",
-    packages=setuptools.find_packages(),
+    url="https://github.com/jsta/gssurgo",
+    packages=setuptools.find_packages(exclude=['tests']),
     classifiers=(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
