@@ -11,8 +11,7 @@ setuptools.setup(
     description="Python toolbox enabling an open source gSSURGO workflow",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/jsta/gssurgo",
-    scripts=['bin/extract_gssurgo_tif', 'bin/__extract_gssurgo_tif__.py'],
+    url="https://github.com/jsta/gssurgo",    
     packages=setuptools.find_packages(exclude=['tests']),
     classifiers=(
         "Programming Language :: Python :: 3",
