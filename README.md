@@ -8,8 +8,6 @@ This repo enables subsequent open source workflows by extracting the grid and ag
 
 ## Prereqs
 
-* Download zip files from: https://nrcs.app.box.com/v/soils
-
 * Have the `arcpy` python module available for the intial `tif` extraction step
 
 * Have the `ogr2ogr` command available and working with the `GPKG` driver
@@ -27,15 +25,15 @@ source activate gSSURGO
 # local install
 # pip install -e  . 
 
-# pypi install 
-pip install gssurgo
+# development install 
+pip install https://github.com/jsta/gssurgo/zipball/master
 ```
 
 ## Usage
 
 ### 1. Extract tifs and build gpkgs
 
-`make all`
+
 
 ### 2. Pull specific variable and merge with corresponding tif
 

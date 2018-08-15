@@ -16,3 +16,5 @@ __pycache__/
 .GetDriver()
 .envrc
 gssurgo.egg-info/
+build
+dist
