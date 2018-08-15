@@ -1,0 +1,2 @@
+# extract_gssurgo_tif gSSURGO_MI.gdb\MapunitRaster_10m tifs\MI.tif  
+C:\Python27\ArcGIS10.3\python.exe -c "import arcpy;arcpy.CopyRaster_management($1, $2)"
