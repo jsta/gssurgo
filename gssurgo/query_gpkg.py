@@ -8,29 +8,29 @@ import gdal
 import pandas as pd
 import numpy as np
 
-def query_gpkg(src_gpkg, sql_query, src_tif, xmax, xmin, ymin, ymax, out_raster):
+def query_gpkg(src_tif, src_gpkg, sql_query, out_raster):
     '''
     gssurgo.query_gpkg(src_gpkg = "gSSURGO_MI.gpkg", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', src_tif = "tifs/gSSURGO_MI.tif", xmin = 925029.1, xmax = 935594, ymin = 2214590.5, ymax = 2225584, out_raster = "tests/nonirryield_r.tif")
     '''
     
-    # read data and join to raster index
-    db = sqlite3.connect(src_gpkg)
-    table = pd.read_sql_query(sql_query, db)
-    table.mukey = table.mukey.astype(int)
-
-    ds = gdal.Open("temp.tif")
-
+    # find src gpkgs
+    ds = gdal.Open(src_tif)
+    
     nrow = ds.RasterYSize
     ncol = ds.RasterXSize
-
     raw_values = ds.ReadAsArray()
-
     pixel_values = raw_values.flatten()
     pixel_values = pd.DataFrame(pixel_values, columns = ['mukey'])
     pixel_values.mukey = pixel_values.mukey.astype(int)
 
     # print(table.mukey.describe())
     # print(table[table.mukey.isin([186365, 1455241])])
+
+
+    # read data and join to raster index
+    db = sqlite3.connect(src_gpkg)
+    table = pd.read_sql_query(sql_query, db)
+    table.mukey = table.mukey.astype(int) 
 
     pixel_values = pd.merge(left = pixel_values, right = table, how = 'left', on = 'mukey')
     pixel_values = pixel_values.iloc[:,1].values

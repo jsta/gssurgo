@@ -52,7 +52,7 @@ gssurgo.build_gpkg("path/to/gSSURGO_STATE.gdb", "path/to/gSSURGO_STATE.gpkg")
 ### 2. Generate an Area of Interest (AOI)
 
 ```
-gssurgo.aoi(xmin = 925029.1, xmax = 935594, ymin = 2214590.5, ymax = 2225584, out_raster = "path/to/aoi.tif")
+gssurgo.aoi(in_raster_path = "tifs", out_raster = "path/to/aoi.tif", xmax = -88.34945, xmin = -88.35470, ymin = 38.70095, ymax = 38.70498)    
 ```
 
 ### 3. Pull specific variable and merge with corresponding tif
