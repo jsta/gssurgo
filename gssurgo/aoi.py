@@ -8,11 +8,13 @@ import os
 import rasterio.merge
 from pyproj import Proj, transform
 
-def state_by_bbox(in_raster_path, xmax, xmin, ymin, ymax):
+def state_by_bbox(fpath, ext, xmax, xmin, ymin, ymax):
     '''
     Examples
     --------
-    gssurgo.state_by_bbox(in_raster_path = "tifs", xmax = -88.34945, xmin = -88.35470, ymin = 38.70095, ymax = 38.70498)
+    gssurgo.state_by_bbox(fpath = "tifs", ext = "tif",  xmax = -88.34945, xmin = -88.35470, ymin = 38.70095, ymax = 38.70498)
+
+    state_by_bbox(fpath = "/home/jose/Documents/Science/Data/gssurgo_data/tifs/", ext = "tif",  xmax = -88.34945, xmin = -88.35470, ymin = 38.70095, ymax = 38.70498)
 
     Notes
     -----
@@ -29,11 +31,10 @@ def state_by_bbox(in_raster_path, xmax, xmin, ymin, ymax):
     # ax = states.plot(color='white', edgecolor='black')
     # plt.show()
 
-    keywords = re.compile(r'.*(%s).tif' % '|'.join(states.STUSPS))
+    keyword_base = r'.*(%s).' + ext
+    keywords = re.compile(keyword_base % '|'.join(states.STUSPS))    
 
-    return list(filter(keywords.match, glob.glob(in_raster_path + "*.tif")))
-    
-    
+    return list(filter(keywords.match, glob.glob(fpath + "*." + ext)))  
 
 def aoi(in_raster_path, out_raster, xmin, ymax, xmax, ymin, src_tif=None):
     '''
@@ -47,8 +48,8 @@ def aoi(in_raster_path, out_raster, xmin, ymax, xmax, ymin, src_tif=None):
     https://gis.stackexchange.com/a/237412/32531
     '''
 
-    if src_tif is not None:
-        src_tif = state_by_bbox(in_raster_path, xmax, xmin, ymin, ymax)
+    if src_tif is None:
+        src_tif = state_by_bbox(fpath = in_raster_path, xmax = xmax, xmin = xmin, ymin = ymin, ymax = ymax, ext = "tif")
 
     # https://gis.stackexchange.com/a/78944/32531
     inProj = Proj(init='epsg:4326')

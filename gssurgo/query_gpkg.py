@@ -7,17 +7,32 @@ import sqlite3
 import gdal
 import pandas as pd
 import numpy as np
+from pyproj import Proj, transform
 
-def query_gpkg(src_tif, src_gpkg, sql_query, out_raster):
+def query_gpkg(src_tif, gpkg_path, sql_query, out_raster):
     '''
-    gssurgo.query_gpkg(src_gpkg = "gSSURGO_MI.gpkg", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', src_tif = "tifs/gSSURGO_MI.tif", xmin = 925029.1, xmax = 935594, ymin = 2214590.5, ymax = 2225584, out_raster = "tests/nonirryield_r.tif")
+    Examples
+    --------
+    gssurgo.query_gpkg(src_tif = "../tests/aoi.tif", gpkg_path = "gpkgs", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "tests/nonirryield_r.tif")
     '''
-    
-    # find src gpkgs
     ds = gdal.Open(src_tif)
     
+    transform = ds.GetGeoTransform()
+    pixelWidth = transform[1]
+    pixelHeight = transform[5]
     nrow = ds.RasterYSize
     ncol = ds.RasterXSize
+    
+    xmin = transform[0]
+    ymax = transform[3]
+    xmax = xmin + ncol * pixelWidth
+    ymin = ymax - nrow * pixelHeight
+    # https://gis.stackexchange.com/a/78944/32531
+    outProj = Proj(init='epsg:4326')
+    inProj = Proj('+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs')    
+    xmin, ymin = transform(inProj, outProj, xmin, ymin)
+    xmax, ymax = transform(inProj, outProj, xmax, ymax)
+    
     raw_values = ds.ReadAsArray()
     pixel_values = raw_values.flatten()
     pixel_values = pd.DataFrame(pixel_values, columns = ['mukey'])
@@ -26,6 +41,8 @@ def query_gpkg(src_tif, src_gpkg, sql_query, out_raster):
     # print(table.mukey.describe())
     # print(table[table.mukey.isin([186365, 1455241])])
 
+    # find src gpkgs
+    src_gpkg = state_by_bbox(fpath = gpkg_path, ext = "gpkg", xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax)
 
     # read data and join to raster index
     db = sqlite3.connect(src_gpkg)
