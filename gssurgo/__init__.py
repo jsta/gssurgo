@@ -3,4 +3,4 @@
 from .viz_numeric_output import viz_numeric_output
 from .query_gpkg import query_gpkg
 
-__all__ = (['viz_numeric_output', 'query_gpkg'])
+__all__ = (['viz_numeric_output', 'query_gpkg', 'build_gpkg'])

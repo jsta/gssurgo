@@ -1,16 +1,16 @@
-# gSSURGO
+# gssurgo
 
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![PyPiVersion](https://img.shields.io/pypi/v/georasters.svg)](https://pypi.python.org/pypi/georasters/)[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
-`gSSURGO` contains multiple text format datasets referenced to a single raster grid. **The raster grids are contained within file geodatabase archives and  can only be extracted using ArcGIS** (using the fileGDB driver).
+The `gSSURGO` data product contains multiple text format datasets referenced to a single raster grid. **The raster grids are contained within file geodatabase archives and  can only be extracted using ArcGIS** (using the fileGDB driver).
 
-This repo enables subsequent open source workflows by extracting the grid and aggregating it along with the remaining data into a geopackage. Specific queries of `gSSURGO` data can be constructed in `SQL` and subsequently called against a given geopackage using the `query_gpkg.py` script.
+This repo enables subsequent open source workflows with `gSSURGO` by extracting grids and aggregating the remaining data into a geopackage. This package enables specific queries of `gSSURGO` data, which are constructed in `SQL`, and subsequently merged with its corresponding (raster) grid.
 
 ## Prereqs
 
-* The intial `tif` (grid) extraction step requies the `arcpy` python module
+* The intial `tif` (grid) extraction step requies the `arcpy` python module. This step assumes that a python executable linked to `arcpy` can be found at `C:\Python27\ArcGIS10.3\python.exe`. Edit [bin/extract_gssurgo_tif](bin/extract_gssurgo_tif) to enable alternate locations.
 
-* Have the python modules listed in [environment.yml](environment.yml) installed. If using Anaconda, make sure you have the **64bit** version. You can install an Anaconda virtual environment with:
+* Remaining operations require a number of dependencies listed in [environment.yml](environment.yml) and [requirements.txt](requirements.txt). If using Anaconda, make sure you have the **64bit** version. You can install an Anaconda virtual environment with:
 
 ```
 conda env create -n gSSURGO -f environment.yml
@@ -27,7 +27,7 @@ source activate gSSURGO
 pip install git+git://github.com/jsta/gssurgo.git
 
 # development upgrade
-pip install --upgrade git+git://github.com/jsta/gssurgo.git
+# pip install --upgrade git+git://github.com/jsta/gssurgo.git
 ```
 
 ## Usage
