@@ -2,19 +2,25 @@
 
 [![PyPiVersion](https://img.shields.io/pypi/v/gssurgo.svg)](https://pypi.python.org/pypi/gssurgo/)[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
-The `gSSURGO` data product contains multiple text format datasets referenced to a single raster grid. **The raster grids are contained within file geodatabase archives and  can only be extracted using ArcGIS** (using the fileGDB driver).
+The `gssurgo` python package enables open source workflows with the `gSSURGO` dataset. It provides:
 
-This repo enables subsequent open source workflows with `gSSURGO` by extracting grids and aggregating the remaining data into a geopackage. This package enables specific queries of `gSSURGO` data, which are constructed in `SQL`, and subsequently merged with its corresponding (raster) grid.
+* A shell script `extract_gssurgo_tif` for generating stand-alone `gSSURGO` grids. **These raster grids are distributed within file geodatabase archives and can only be extracted using ArcGIS, the fileGDB driver, or (in the case of `extract_gssurgo_tif`) the `arcpy` python package.**  
+
+* Python functions for converting Geodatabase files to geopackage format. 
+ 
+* Python functions for returning the results of specific `SQL` queries of `gSSURGO` data.
+ 
+* Python functions for referencing query results to corresponding (raster) grid cells.
 
 ## Prereqs
 
 * The intial `tif` (grid) extraction step requies the `arcpy` python module. This step assumes that a python executable linked to `arcpy` can be found at `C:\Python27\ArcGIS10.3\python.exe`. Edit [bin/extract_gssurgo_tif](bin/extract_gssurgo_tif) to enable alternate locations.
 
-* Remaining operations require a number of dependencies listed in [environment.yml](environment.yml) and [requirements.txt](requirements.txt). If using Anaconda, make sure you have the **64bit** version. You can install an Anaconda virtual environment with:
+* Remaining operations require the dependencies listed in [environment.yml](environment.yml) and [requirements.txt](requirements.txt). If using Anaconda, make sure you have the **64bit** version. You can install an Anaconda virtual environment with:
 
 ```
-conda env create -n gSSURGO -f environment.yml
-source activate gSSURGO
+conda env create -n gssurgo -f environment.yml
+source activate gssurgo
 ```
 
 ## Installation
@@ -43,18 +49,24 @@ import gssurgo
 gssurgo.build_gpkg("path/to/gSSURGO_STATE.gdb", "path/to/gSSURGO_STATE.gpkg")
 ```
 
-### 2. Pull specific variable and merge with corresponding tif
+### 2. Generate an Area of Interest (AOI)
 
 ```
-gssurgo.query_gpkg(src_gpkg = "path/to/gSSURGO_MI.gpkg", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', src_tif = "path/to/gSSURGO_MI.tif", xmin = 925029.1, xmax = 935594, ymin = 2214590.5, ymax = 2225584, out_raster = "tests/nonirryield_r.tif")
+gssurgo.aoi(xmin = 925029.1, xmax = 935594, ymin = 2214590.5, ymax = 2225584, out_raster = "path/to/aoi.tif")
 ```
 
-> The `sql_query` parameter must give a two column result of `mukey` and `some_variable`. The above example produces a tif of non irrigated corn yields clipped to the defined bounding box.
-
-### 3. Visualize output
+### 3. Pull specific variable and merge with corresponding tif
 
 ```
-gssurgo.viz_numeric_output("tests/nonirryield_r.tif", "tests/nonirryield_r.png")
+gssurgo.query_gpkg(src_tif = "path/to/aoi.tif", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "path/to/aoi_results.tif")
+```
+
+> The `sql_query` parameter must give a two column result of `mukey` and `some_variable`.
+
+### 4. Visualize output
+
+```
+gssurgo.viz_numeric_output("path/to/aoi_results.tif", "path/to/aoi_results.png")
 ```
 
 ![](tests/nonirryield_r.png)

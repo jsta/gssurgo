@@ -18,11 +18,6 @@ def query_gpkg(src_gpkg, sql_query, src_tif, xmax, xmin, ymin, ymax, out_raster)
     table = pd.read_sql_query(sql_query, db)
     table.mukey = table.mukey.astype(int)
 
-    # crop original raster to bounding box so we can read in memory
-    # https://gis.stackexchange.com/a/237412/32531
-    ds = gdal.Open(src_tif)
-    raster_res = ds.GetGeoTransform()[1]
-    ds = gdal.Translate('temp.tif', ds, projWin = [xmin, ymax, xmax, ymin])
     ds = gdal.Open("temp.tif")
 
     nrow = ds.RasterYSize
