@@ -8,7 +8,7 @@ import gdal
 import pandas as pd
 import numpy as np
 from pyproj import Proj, transform
-from aoi import state_by_bbox
+from .aoi import state_by_bbox
 
 def query_gpkg(src_tif, gpkg_path, sql_query, out_raster):
     '''
