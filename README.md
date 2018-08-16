@@ -2,9 +2,9 @@
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
-`gSSURGO` contains multiple text format datasets referenced to a single raster grid. The raster grids are contained within file geodatabase archives and  can only be extracted using ArcGIS (using the fileGDB driver).
+`gSSURGO` contains multiple text format datasets referenced to a single raster grid. **The raster grids are contained within file geodatabase archives and  can only be extracted using ArcGIS** (using the fileGDB driver).
 
-This repo enables subsequent open source workflows by extracting the grid and aggregating it along with the remaining data into a geopackage. Specific queries of `gSSURGO` data need to be constructed in `SQL` and subsequently called against a given geopackage using the `query_gpkg.py` script.
+This repo enables subsequent open source workflows by extracting the grid and aggregating it along with the remaining data into a geopackage. Specific queries of `gSSURGO` data can be constructed in `SQL` and subsequently called against a given geopackage using the `query_gpkg.py` script.
 
 ## Prereqs
 
@@ -40,16 +40,16 @@ extract_gssurgo_tif 'path/to/gSSURGO_STATE.gdb/MapunitRaster_10m' 'path/to/STATE
 
 ```
 import gssurgo
-gssurgo.build_gpkg("gSSURGO_MI.gdb", "gSSURGO_MI.gpkg")
+gssurgo.build_gpkg("path/to/gSSURGO_STATE.gdb", "path/to/gSSURGO_STATE.gpkg")
 ```
 
 ### 2. Pull specific variable and merge with corresponding tif
 
 ```
-gssurgo.query_gpkg(src_gpkg = "gSSURGO_MI.gpkg", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', src_tif = "tifs/gSSURGO_MI.tif", xmin = 925029.1, xmax = 935594, ymin = 2214590.5, ymax = 2225584, out_raster = "tests/nonirryield_r.tif")
+gssurgo.query_gpkg(src_gpkg = "path/to/gSSURGO_MI.gpkg", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', src_tif = "path/to/gSSURGO_MI.tif", xmin = 925029.1, xmax = 935594, ymin = 2214590.5, ymax = 2225584, out_raster = "tests/nonirryield_r.tif")
 ```
 
-> The `sql_query` parameter must give a two column result of `mukey` and `some_variable`. The above example produces a tif of non irrigated corn yields clipped to the defined bounding box: `'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")'`
+> The `sql_query` parameter must give a two column result of `mukey` and `some_variable`. The above example produces a tif of non irrigated corn yields clipped to the defined bounding box.
 
 ### 3. Visualize output
 

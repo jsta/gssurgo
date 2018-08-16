@@ -2,6 +2,5 @@
 # -*- coding: utf-8 -*-
 from .viz_numeric_output import viz_numeric_output
 from .query_gpkg import query_gpkg
-from .extract_gssurgo_tif import extract_tif
 
-__all__ = (['viz_numeric_output', 'query_gpkg', 'extract_tif'])
+__all__ = (['viz_numeric_output', 'query_gpkg'])
