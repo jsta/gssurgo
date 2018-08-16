@@ -22,8 +22,8 @@ def query_gpkg(src_tif, gpkg_path, sql_query, out_raster):
     ds = gdal.Open(src_tif)
     
     gtransform = ds.GetGeoTransform()
-    pixelWidth = transform[1]
-    pixelHeight = transform[5]
+    pixelWidth = gtransform[1]
+    pixelHeight = gtransform[5]
     nrow = ds.RasterYSize
     ncol = ds.RasterXSize
     
