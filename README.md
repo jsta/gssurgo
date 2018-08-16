@@ -1,6 +1,6 @@
 # gssurgo
 
-[![PyPiVersion](https://img.shields.io/pypi/v/georasters.svg)](https://pypi.python.org/pypi/georasters/)[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![PyPiVersion](https://img.shields.io/pypi/v/gssurgo.svg)](https://pypi.python.org/pypi/gssurgo/)[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 The `gSSURGO` data product contains multiple text format datasets referenced to a single raster grid. **The raster grids are contained within file geodatabase archives and  can only be extracted using ArcGIS** (using the fileGDB driver).
 
