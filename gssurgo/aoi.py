@@ -7,22 +7,21 @@ import gdal
 import os
 import rasterio.merge
 from pyproj import Proj, transform
+import pkg_resources
 
 def state_by_bbox(fpath, ext, xmax, xmin, ymin, ymax):
     '''
     Examples
     --------
     gssurgo.state_by_bbox(fpath = "tifs", ext = "tif",  xmax = -88.34945, xmin = -88.35470, ymin = 38.70095, ymax = 38.70498)
-
-    state_by_bbox(fpath = "/home/jose/Documents/Science/Data/gssurgo_data/tifs/", ext = "tif",  xmax = -88.34945, xmin = -88.35470, ymin = 38.70095, ymax = 38.70498)
-
+    
     Notes
     -----
     download: http://www2.census.gov/geo/tiger/GENZ2017/shp/cb_2017_us_state_500k.zip
     `ogr2ogr -f GPKG states.gpkg cb_2017_us_state_50k.shp`
     '''
-
-    states = gpd.read_file("states.gpkg")
+ 
+    states = gpd.read_file(pkg_resources.resource_filename('gssurgo', "states.gpkg"))
     states = states[states.STATEFP.astype(int) < 60]
     states = states[~states.NAME.isin(['Hawaii', 'Alaska'])]    
 

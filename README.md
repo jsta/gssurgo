@@ -52,13 +52,15 @@ gssurgo.build_gpkg("path/to/gSSURGO_STATE.gdb", "path/to/gSSURGO_STATE.gpkg")
 ### 2. Generate an Area of Interest (AOI)
 
 ```
-gssurgo.aoi(in_raster_path = "tifs", out_raster = "path/to/aoi.tif", xmax = -88.34945, xmin = -88.35470, ymin = 38.70095, ymax = 38.70498)    
+gssurgo.aoi(in_raster_path = "tifs", out_raster = "path/to/aoi.tif", xmax = -88.34945, xmin = -88.35470, ymin = 38.70095, ymax = 38.70498)
 ```
 
 ### 3. Pull specific variable and merge with corresponding tif
 
 ```
 gssurgo.query_gpkg(src_tif = "path/to/aoi.tif", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "path/to/aoi_results.tif")
+
+gssurgo.query_gpkg(src_tif = "tests/aoi.tif", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "path/to/aoi_results.tif")
 ```
 
 > The `sql_query` parameter must give a two column result of `mukey` and `some_variable`.
