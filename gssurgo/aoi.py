@@ -1,7 +1,6 @@
 # return us state abbeviations from state that intersect a bounding box
 import geopandas as gpd
 from matplotlib import pyplot as plt
-import glob
 import re
 import gdal
 import os
@@ -32,8 +31,9 @@ def state_by_bbox(fpath, ext, xmax, xmin, ymin, ymax):
 
     keyword_base = r'.*(%s).' + ext
     keywords = re.compile(keyword_base % '|'.join(states.STUSPS))    
+    candidate_files = [os.path.join(fpath, f) for f in os.listdir(fpath) if f.endswith('.' + ext)]
 
-    return list(filter(keywords.match, glob.glob(fpath + "/*." + ext)))  
+    return list(filter(keywords.match, candidate_files))
 
 def aoi(in_raster_path, out_raster, xmin, ymax, xmax, ymin, src_tif=None):
     '''
