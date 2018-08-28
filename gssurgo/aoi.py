@@ -33,7 +33,7 @@ def state_by_bbox(fpath, ext, xmax, xmin, ymin, ymax):
     keyword_base = r'.*(%s).' + ext
     keywords = re.compile(keyword_base % '|'.join(states.STUSPS))    
 
-    return list(filter(keywords.match, glob.glob(fpath + "*." + ext)))  
+    return list(filter(keywords.match, glob.glob(fpath + "/*." + ext)))  
 
 def aoi(in_raster_path, out_raster, xmin, ymax, xmax, ymin, src_tif=None):
     '''
