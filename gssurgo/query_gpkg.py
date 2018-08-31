@@ -1,3 +1,5 @@
+"""Pull gSSURGO data based on mukeys."""
+
 # https://gdal.org/python/
 # https://gis.stackexchange.com/a/200477/32531
 
@@ -10,24 +12,27 @@ import numpy as np
 from pyproj import Proj, transform
 from .aoi import state_by_bbox
 
+
 def query_gpkg(src_tif, gpkg_path, sql_query, out_raster):
-    '''
+    r"""Pull gSSURGO data based on mukeys.
+
     Examples
     --------
-    gssurgo.query_gpkg(src_tif = "tests/aoi.tif", gpkg_path = "gpkgs", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "tests/nonirryield_r.tif")    
+    gssurgo.query_gpkg(src_tif = "tests/aoi.tif", gpkg_path = "gpkgs", \
+                       sql_query = 'SELECT mukey, nonirryield_r \
+                                    FROM mucropyld \
+                                    WHERE (cropname = "Corn")', \
+                                    out_raster = "tests/nonirryield_r.tif")
 
-    sql_query = "SELECT mukey, AVG(kwfact) AS kwfact FROM (SELECT * FROM (SELECT TBL_LEFT.mukey AS mukey, TBL_LEFT.cokey AS cokey, TBL_LEFT.majcompflag AS majcompflag, TBL_RIGHT.hzname AS hzname, TBL_RIGHT.kwfact AS kwfact   FROM (SELECT mukey, cokey, majcompflag FROM component) AS TBL_LEFT   LEFT JOIN (SELECT hzname, kwfact, cokey FROM chorizon) AS TBL_RIGHT   ON (TBL_LEFT.cokey = TBL_RIGHT.cokey) ) WHERE ((hzname = 'A') AND (majcompflag = 'Yes'))) GROUP BY mukey"
-
-    sql_query = "SELECT mukey, pwsl1pomu FROM Valu1"
-    '''
+    """
     ds = gdal.Open(src_tif)
-    
+
     gtransform = ds.GetGeoTransform()
     pixelWidth = gtransform[1]
     pixelHeight = gtransform[5]
     nrow = ds.RasterYSize
     ncol = ds.RasterXSize
-    
+
     xmin = gtransform[0]
     ymax = gtransform[3]
     xmax = xmin + ncol * pixelWidth
@@ -35,10 +40,12 @@ def query_gpkg(src_tif, gpkg_path, sql_query, out_raster):
 
     # https://gis.stackexchange.com/a/78944/32531
     outProj = Proj(init='epsg:4326')
-    inProj = Proj('+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs')    
+    inProj = Proj('+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 \
+                   +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m \
+                   +no_defs')
     xmin, ymin = transform(inProj, outProj, xmin, ymin)
     xmax, ymax = transform(inProj, outProj, xmax, ymax)
-    
+
     raw_values = ds.ReadAsArray()
     pixel_values = raw_values.flatten()
     pixel_values = pd.DataFrame(pixel_values, columns = ['mukey'])
@@ -48,14 +55,15 @@ def query_gpkg(src_tif, gpkg_path, sql_query, out_raster):
     # print(table[table.mukey.isin([186365, 1455241])])
 
     # find src gpkgs
-    src_gpkg = state_by_bbox(fpath = gpkg_path, ext = "gpkg", xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax)
+    src_gpkg = state_by_bbox(fpath = gpkg_path, ext = "gpkg", xmin = xmin,
+                             xmax = xmax, ymin = ymin, ymax = ymax)
 
     # read data and join to raster index
     if(len(src_gpkg) == 1):
         db = sqlite3.connect(''.join(src_gpkg))
         table = pd.read_sql_query(sql_query, db)
         table.mukey = table.mukey.astype(int)
-    else: 
+    else:
         db = sqlite3.connect(''.join(src_gpkg[0]))
         table1 = pd.read_sql_query(sql_query, db)
         table1.mukey = table1.mukey.astype(int)
@@ -66,8 +74,9 @@ def query_gpkg(src_tif, gpkg_path, sql_query, out_raster):
 
         table = table1.append(table2)
 
-    pixel_values = pd.merge(left = pixel_values, right = table, how = 'left', on = 'mukey')
-    pixel_values = pixel_values.iloc[:,1].values
+    pixel_values = pd.merge(left = pixel_values, right = table,
+                            how = 'left', on = 'mukey')
+    pixel_values = pixel_values.iloc[:, 1].values
     pixel_values = np.reshape(pixel_values, (nrow, ncol))
     # print(pixel_values)
 

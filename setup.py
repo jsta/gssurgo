@@ -1,3 +1,5 @@
+"""A package that enables open source workflows with the gSSURGO dataset."""
+
 import setuptools
 
 with open("README.md", "r") as fh:
