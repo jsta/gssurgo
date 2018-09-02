@@ -63,7 +63,7 @@ gssurgo.query_gpkg(src_tif = "path/to/aoi.tif", sql_query = 'SELECT mukey, nonir
 gssurgo.query_gpkg(src_tif = "tests/aoi.tif", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "path/to/aoi_results.tif")
 ```
 
-> The `sql_query` parameter must give a two column result of `mukey` and `some_variable`.
+> The `sql_query` parameter must give a two column result of `mukey` and `some_variable` where no `mukey` entries are duplicated.
 
 ### 4. Visualize output
 
