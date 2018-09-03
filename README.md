@@ -58,9 +58,10 @@ gssurgo.aoi(in_raster_path = "tifs", out_raster = "path/to/aoi.tif", xmax = -88.
 ### 3. Pull specific variable and merge with corresponding tif
 
 ```
-gssurgo.query_gpkg(src_tif = "path/to/aoi.tif", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "path/to/aoi_results.tif")
+gssurgo.query_gpkg(src_tif = "tests/aoi.tif", gpkg_path = "path/to/gkpgs/", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "tests/aoi_results.tif")
 
-gssurgo.query_gpkg(src_tif = "tests/aoi.tif", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "path/to/aoi_results.tif")
+gssurgo.query_gpkg(src_tif = "tests/aoi.tif", gpkg_path = "path/to/gpkgs/", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "tests/aoi_results.tif")
+
 ```
 
 > The `sql_query` parameter must give a two column result of `mukey` and `some_variable` where no `mukey` entries are duplicated.
