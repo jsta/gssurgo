@@ -18,3 +18,4 @@ __pycache__/
 gssurgo.egg-info/
 build
 dist
+.vscode
