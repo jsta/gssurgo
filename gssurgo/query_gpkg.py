@@ -16,6 +16,11 @@ from .aoi import state_by_bbox
 def query_gpkg(src_tif, gpkg_path, sql_query, out_raster):
     r"""Pull gSSURGO data based on mukeys.
 
+    :param str src_tif: location of an AOI tif file
+    :param str gpkg_path: location of folder containing state gpkg databases
+    :param str sql_query: an SQL query string or location of an SQL query file
+    :param str out_raster: location of the output raster
+
     Examples
     --------
     gssurgo.query_gpkg(src_tif = "tests/aoi.tif", gpkg_path = "gpkgs", \
@@ -59,6 +64,9 @@ def query_gpkg(src_tif, gpkg_path, sql_query, out_raster):
                              xmax = xmax, ymin = ymin, ymax = ymax)
 
     # read data and join to raster index
+    if(os.path.isfile(sql_query)):
+        sql_query = open(sql_query, 'r').read()
+
     if(len(src_gpkg) == 1):
         db = sqlite3.connect(''.join(src_gpkg))
         table = pd.read_sql_query(sql_query, db)
