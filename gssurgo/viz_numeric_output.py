@@ -20,6 +20,5 @@ def viz_numeric_output(input_tif, output_png):
     f, ax = plt.subplots(1, figsize=(12, 12))
 
     ax.imshow(raster.read(1), cmap='gray')
-    ax.legend()
     plt.savefig(output_png)
     plt.show()
