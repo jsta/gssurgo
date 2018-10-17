@@ -21,4 +21,3 @@ def viz_numeric_output(input_tif, output_png):
     plt.savefig(output_png)
     ax.imshow(raster.read(1), cmap='gray')
     ax.show()
-
