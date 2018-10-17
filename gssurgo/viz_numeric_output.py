@@ -18,5 +18,7 @@ def viz_numeric_output(input_tif, output_png):
     raster = rasterio.open(input_tif)
 
     f, ax = plt.subplots(1, figsize=(12, 12))
-    ax.imshow(raster.read(1), cmap='gray')
     plt.savefig(output_png)
+    ax.imshow(raster.read(1), cmap='gray')
+    ax.show()
+
