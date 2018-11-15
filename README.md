@@ -38,6 +38,8 @@ pip install git+git://github.com/jsta/gssurgo.git
 
 ## Usage
 
+A demonstration workflow using the `gssurgo` python package can be found at: https://github.com/jsta/gssurgo_data
+
 ### 1. Extract tif and build gpkgs
 
 ```
