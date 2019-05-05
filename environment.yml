@@ -1,6 +1,0 @@
-python=3.6.4
-gdal
-pandas
-rasterio
-matplotlib
-geopandas
