@@ -7,7 +7,7 @@ dist: trusty
 
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y libgdal-dev
+  - sudo apt-get install -y libgdal-dev python-devel
   - gdal-config --version
   - pip install --upgrade pip
 
