@@ -1,5 +1,5 @@
 python=3.6.4
-gdal
+gdal==2.4.0
 pandas
 rasterio
 matplotlib
