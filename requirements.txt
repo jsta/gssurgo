@@ -1,6 +1,6 @@
 python=3.6.4
 gdal==2.4.0
 pandas==0.24.2
-rasterio
+rasterio==1.0.22
 matplotlib
 geopandas
