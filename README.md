@@ -74,4 +74,4 @@ gssurgo.query_gpkg(src_tif = "tests/aoi.tif", gpkg_path = "path/to/gpkgs/", sql_
 gssurgo.viz_numeric_output("path/to/aoi_results.tif", "path/to/aoi_results.png")
 ```
 
-![](tests/nonirryield_r.png)
+![](scratch/nonirryield_r.png)
