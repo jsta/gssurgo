@@ -3,4 +3,4 @@ pandas
 rasterio
 matplotlib
 geopandas
-pytest
+pytest==4.4.1
