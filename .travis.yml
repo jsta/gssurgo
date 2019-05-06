@@ -9,7 +9,8 @@ addons:
   apt:
     sources:      
       - sourceline: 'ppa:ubuntugis/ubuntugis-unstable'      
-    packages:      
+    packages:
+      - libgdal-dev
       - python-gdal      
 
 before_install:
