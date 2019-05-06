@@ -46,20 +46,20 @@ A demonstration workflow using the `gssurgo` python package can be found at: htt
 extract_gssurgo_tif 'path/to/gSSURGO_STATE.gdb/MapunitRaster_10m' 'path/to/STATE.tif'
 ```
 
-```
+```py
 import gssurgo
 gssurgo.build_gpkg("path/to/gSSURGO_STATE.gdb", "path/to/gSSURGO_STATE.gpkg")
 ```
 
 ### 2. Generate an Area of Interest (AOI)
 
-```
+```py
 gssurgo.aoi(in_raster_path = "tifs", out_raster = "path/to/aoi.tif", xmax = -88.34945, xmin = -88.35470, ymin = 38.70095, ymax = 38.70498)
 ```
 
 ### 3. Pull specific variable and merge with corresponding tif
 
-```
+```py
 gssurgo.query_gpkg(src_tif = "tests/aoi.tif", gpkg_path = "path/to/gkpgs/", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "tests/aoi_results.tif")
 
 gssurgo.query_gpkg(src_tif = "tests/aoi.tif", gpkg_path = "path/to/gpkgs/", sql_query = 'SELECT mukey, nonirryield_r FROM mucropyld WHERE (cropname = "Corn")', out_raster = "tests/aoi_results.tif")
@@ -70,7 +70,7 @@ gssurgo.query_gpkg(src_tif = "tests/aoi.tif", gpkg_path = "path/to/gpkgs/", sql_
 
 ### 4. Visualize output
 
-```
+```py
 gssurgo.viz_numeric_output("path/to/aoi_results.tif", "path/to/aoi_results.png")
 ```
 
