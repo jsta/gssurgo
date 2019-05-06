@@ -12,6 +12,7 @@ addons:
     packages:
       - libgdal-dev
       - python-gdal      
+      - libproj-dev
 
 before_install:
   - gdal-config --version
