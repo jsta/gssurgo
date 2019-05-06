@@ -1,4 +1,4 @@
-gdal==2.4.0
+gdal==2.3.3
 pandas
 rasterio
 matplotlib
