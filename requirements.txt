@@ -1,5 +1,5 @@
 gdal==2.3.3
-pandas
+pandas==0.24.2
 rasterio
 matplotlib
 geopandas
