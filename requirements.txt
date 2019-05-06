@@ -1,6 +1,6 @@
 gdal==2.3.3
 pandas
 rasterio
-matplotlib
+matplotlib==3.0.3
 geopandas
 pytest
