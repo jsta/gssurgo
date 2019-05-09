@@ -4,8 +4,8 @@ dependencies:
 - anaconda
 - pip
 - pandas==0.24.2
-- rasterio
 - matplotlib==3.0.3
-- geopandas
+- geopandas==0.5.0
 - pip:  
+  - rasterio==1.0.22
   - pytest==4.4.1
