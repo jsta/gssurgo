@@ -1,0 +1,12 @@
+name: gssurgo
+dependencies:
+- python>=3.6.4
+- anaconda
+- pip
+- pandas
+- rasterio
+- matplotlib
+- geopandas
+- pip:  
+  - pytest
+  - gdal==3.0.0

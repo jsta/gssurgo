@@ -13,7 +13,7 @@ install:
   - conda update conda
   - conda info
 
-  - conda env create --name gssurgo --file=requirements.txt
+  - conda env create --name gssurgo --file=environment.yml
   - source activate gssurgo  
   - pip install -e .
   - conda list
