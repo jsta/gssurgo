@@ -9,4 +9,3 @@ dependencies:
 - geopandas
 - pip:  
   - pytest==4.4.1
-  - gdal==3.0.0
