@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="gssurgo",
-    version="0.0.4",
+    version="0.0.5",
     author="Joseph Stachelek",
     author_email="stachel2@msu.edu",
     description="Python toolbox enabling an open source gSSURGO workflow",
