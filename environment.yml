@@ -5,7 +5,7 @@ dependencies:
 - pip
 - pandas==0.24.2
 - matplotlib==3.0.3
-- gdal==2.3.3
+- gdal==2.4.0
 - pip:  
   - geopandas==0.5.0
   - rasterio==1.0.22

@@ -1,4 +1,4 @@
-gdal==2.3.3
+gdal==2.4.0
 pandas==0.24.2
 rasterio==1.0.22
 matplotlib==3.0.3
