@@ -1,5 +1,5 @@
 gdal==2.4.0
-pandas==0.24.2 # pyup: update minor
+pandas==0.25.0 # pyup: update minor
 rasterio==1.0.24 # pyup: update minor
 matplotlib==3.1.0 # pyup: update minor
 geopandas==0.5.0
