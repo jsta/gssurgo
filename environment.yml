@@ -5,10 +5,10 @@ dependencies:
 - python>=3.6.4
 - anaconda
 - pip
-- pandas==0.24.2
-- matplotlib==3.0.3
-- gdal>=2.4.0
+- pandas>=0.24.2
+- matplotlib>=3.0.3
+- gdal>=2.4.2
 - pip:    
-  - geopandas==0.5.0
-  - rasterio==1.0.22
-  - pytest==4.4.1
+  - geopandas>=0.5.0
+  - rasterio>=1.0.22
+  - pytest>=4.4.1
