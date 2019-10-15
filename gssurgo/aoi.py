@@ -84,8 +84,8 @@ def aoi(in_raster_path, out_raster, xmin, ymax, xmax, ymin, src_tif = None):
                             projWin = [xmin, ymax, xmax, ymin])
 
         # https://gist.github.com/nishadhka/9bc758129c2949a3194b79570198f544
-        d1 = rasterio.open("temp1.tif")
-        d2 = rasterio.open("temp2.tif")
+        d1 = rasterio.open("temp1.tif", dtype = "uint32")
+        d2 = rasterio.open("temp2.tif", dtype = "uint32")
 
         dest, output_transform = rasterio.merge.merge([d1, d2])
 
