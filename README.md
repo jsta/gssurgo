@@ -1,6 +1,6 @@
 # gssurgo
 
-[![PyPiVersion](https://img.shields.io/pypi/v/gssurgo.svg)](https://pypi.python.org/pypi/gssurgo/) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![PYPI Downloads](https://img.shields.io/pypi/dm/gssurgo.svg)](https://pypistats.org/packages/gssurgo) [![Build Status](https://travis-ci.org/jsta/gssurgo.svg?branch=master)](https://travis-ci.org/jsta/gssurgo)
+[![PyPiVersion](https://img.shields.io/pypi/v/gssurgo.svg)](https://pypi.python.org/pypi/gssurgo/) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![PYPI Downloads](https://img.shields.io/pypi/dm/gssurgo.svg)](https://pypistats.org/packages/gssurgo) [![Build Status](https://travis-ci.org/jsta/gssurgo.svg?branch=master)](https://travis-ci.org/jsta/gssurgo) [![Code DOI](https://zenodo.org/badge/142450474.svg)](https://zenodo.org/badge/latestdoi/142450474)
 
 The `gssurgo` python package enables open source workflows with the `gSSURGO` dataset. It provides:
 
