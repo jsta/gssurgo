@@ -15,6 +15,10 @@ RUN Rscript -e "devtools::install_github(c('mikejohnson51/HydroData', 'cont-limn
 
 RUN Rscript -e "install.packages(c('dplyr', 'cowplot', 'sf', 'ggplot2'), repos = 'https://cran.rstudio.com')"
 
-RUN Rscript -e "install.packages(c('brms', 'corrr', 'janitor', 'scales', 'purrr', 'stringr'), repos = 'https://cran.rstudio.com')"
+WORKDIR ~/
 
 RUN git clone https://github.com/CNHlakes/beyond_land_use.git
+
+RUN cd beyond_land_use
+
+RUN touch data/dt.rds
