@@ -23,6 +23,8 @@ RUN git clone https://github.com/CNHlakes/beyond_land_use.git
 
 RUN cd beyond_land_use
 
+RUN Rscript -e "remotes::install_cran('brms', force = FALSE)"
+
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     p7zip-full
@@ -30,7 +32,5 @@ RUN apt-get update \
 RUN Rscript -e "install.packages(c('nhdR'), repos = 'https://cran.rstudio.com')"
 
 RUN Rscript -e "install.packages(c('FedData', 'assertr', 'cdlTools', 'unpivotr'), repos = 'https://cran.rstudio.com')"
-
-RUN Rscript -e "install.packages(c('brms'), repos = 'https://cran.rstudio.com')"
 
 RUN Rscript -e "install.packages(c('snakecase', 'tidybayes'), repos = 'https://cran.rstudio.com')"
